@@ -180,11 +180,13 @@ bool GT911::readTouchPoints()
   return result;
 }
 
-bool GT911::begin(int8_t intPin, int8_t rstPin, uint8_t addr, uint32_t clk)
+bool GT911::begin(int8_t intPin, int8_t rstPin, uint8_t addr, int8_t sdaPin, int8_t sclPin, uint32_t clk)
 {
   _intPin = intPin;
   _rstPin = rstPin;
   _addr = addr;
+  _sdaPin = sdaPin;
+  _sclPin = sclPin;
 
   if (_rstPin > 0)
   {
@@ -208,8 +210,13 @@ bool GT911::begin(int8_t intPin, int8_t rstPin, uint8_t addr, uint32_t clk)
     attachInterrupt(_intPin, _gt911_irq_handler, FALLING);
   }
 
-  _wire->begin();
   _wire->setClock(clk);
+  if (_sdaPin > 0 && _sclPin > 0)
+  {
+    _wire->setPins(_sdaPin, _sclPin);
+  }
+  _wire->begin();
+  
   _wire->beginTransmission(_addr);
   if (_wire->endTransmission() == 0)
   {
