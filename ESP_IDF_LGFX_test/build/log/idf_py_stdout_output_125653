@@ -1,0 +1,48 @@
+-- Found Git: /usr/bin/git (found version "2.34.1") 
+-- ccache will be used for faster recompilation
+-- The C compiler identification is GNU 13.2.0
+-- The CXX compiler identification is GNU 13.2.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /home/yjkim/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/yjkim/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/yjkim/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin/xtensa-esp32s3-elf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- git rev-parse returned 'fatal: (현재 폴더 또는 상위 폴더 중 일부가) 깃 저장소가 아닙니다: .git'
+-- Could not use 'git describe' to determine PROJECT_VER.
+-- Building ESP-IDF components for target esp32s3
+-- LovyanGFX use components = nvs_flash;efuse;esp_lcd;driver;esp_timer
+-- Project sdkconfig file /home/yjkim/works/esp32_ws/ESP_IDF_LGFX_test/sdkconfig
+-- Compiler supported targets: xtensa-esp-elf
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of time_t
+-- Check size of time_t - done
+-- Found Python3: /home/yjkim/.espressif/python_env/idf5.2_py3.10_env/bin/python (found version "3.10.12") found components: Interpreter 
+-- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS
+-- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS - Success
+-- App "ESP_IDF_LGFX_test" version: 1
+-- Adding linker script /home/yjkim/works/esp32_ws/ESP_IDF_LGFX_test/build/esp-idf/esp_system/ld/memory.ld
+-- Adding linker script /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_system/ld/esp32s3/sections.ld.in
+-- Adding linker script /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ld
+-- Adding linker script /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.api.ld
+-- Adding linker script /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.libgcc.ld
+-- Adding linker script /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.newlib.ld
+-- Adding linker script /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.version.ld
+-- Adding linker script /home/yjkim/opt/esp/v5.2.1/esp-idf/components/soc/esp32s3/ld/esp32s3.peripherals.ld
+-- LovyanGFX use components = nvs_flash;efuse;esp_lcd;driver;esp_timer
+-- Components: LovyanGFX app_trace app_update bootloader bootloader_support bt cmock console cxx driver efuse esp-tls esp_adc esp_app_format esp_bootloader_format esp_coex esp_common esp_eth esp_event esp_gdbstub esp_hid esp_http_client esp_http_server esp_https_ota esp_https_server esp_hw_support esp_lcd esp_local_ctrl esp_mm esp_netif esp_netif_stack esp_partition esp_phy esp_pm esp_psram esp_ringbuf esp_rom esp_system esp_timer esp_wifi espcoredump esptool_py fatfs freertos hal heap http_parser idf_test ieee802154 json log lwip main mbedtls mqtt newlib nvs_flash nvs_sec_provider openthread partition_table perfmon protobuf-c protocomm pthread sdmmc soc spi_flash spiffs tcp_transport touch_element ulp unity usb vfs wear_levelling wifi_provisioning wpa_supplicant xtensa
+-- Component paths: /home/yjkim/works/esp32_ws/ESP_IDF_LGFX_test/components/LovyanGFX /home/yjkim/opt/esp/v5.2.1/esp-idf/components/app_trace /home/yjkim/opt/esp/v5.2.1/esp-idf/components/app_update /home/yjkim/opt/esp/v5.2.1/esp-idf/components/bootloader /home/yjkim/opt/esp/v5.2.1/esp-idf/components/bootloader_support /home/yjkim/opt/esp/v5.2.1/esp-idf/components/bt /home/yjkim/opt/esp/v5.2.1/esp-idf/components/cmock /home/yjkim/opt/esp/v5.2.1/esp-idf/components/console /home/yjkim/opt/esp/v5.2.1/esp-idf/components/cxx /home/yjkim/opt/esp/v5.2.1/esp-idf/components/driver /home/yjkim/opt/esp/v5.2.1/esp-idf/components/efuse /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp-tls /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_adc /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_app_format /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_bootloader_format /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_coex /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_common /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_eth /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_event /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_gdbstub /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_hid /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_http_client /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_http_server /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_https_ota /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_https_server /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_hw_support /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_lcd /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_local_ctrl /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_mm /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_netif /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_netif_stack /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_partition /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_phy /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_pm /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_psram /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_ringbuf /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_rom /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_system /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_timer /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esp_wifi /home/yjkim/opt/esp/v5.2.1/esp-idf/components/espcoredump /home/yjkim/opt/esp/v5.2.1/esp-idf/components/esptool_py /home/yjkim/opt/esp/v5.2.1/esp-idf/components/fatfs /home/yjkim/opt/esp/v5.2.1/esp-idf/components/freertos /home/yjkim/opt/esp/v5.2.1/esp-idf/components/hal /home/yjkim/opt/esp/v5.2.1/esp-idf/components/heap /home/yjkim/opt/esp/v5.2.1/esp-idf/components/http_parser /home/yjkim/opt/esp/v5.2.1/esp-idf/components/idf_test /home/yjkim/opt/esp/v5.2.1/esp-idf/components/ieee802154 /home/yjkim/opt/esp/v5.2.1/esp-idf/components/json /home/yjkim/opt/esp/v5.2.1/esp-idf/components/log /home/yjkim/opt/esp/v5.2.1/esp-idf/components/lwip /home/yjkim/works/esp32_ws/ESP_IDF_LGFX_test/main /home/yjkim/opt/esp/v5.2.1/esp-idf/components/mbedtls /home/yjkim/opt/esp/v5.2.1/esp-idf/components/mqtt /home/yjkim/opt/esp/v5.2.1/esp-idf/components/newlib /home/yjkim/opt/esp/v5.2.1/esp-idf/components/nvs_flash /home/yjkim/opt/esp/v5.2.1/esp-idf/components/nvs_sec_provider /home/yjkim/opt/esp/v5.2.1/esp-idf/components/openthread /home/yjkim/opt/esp/v5.2.1/esp-idf/components/partition_table /home/yjkim/opt/esp/v5.2.1/esp-idf/components/perfmon /home/yjkim/opt/esp/v5.2.1/esp-idf/components/protobuf-c /home/yjkim/opt/esp/v5.2.1/esp-idf/components/protocomm /home/yjkim/opt/esp/v5.2.1/esp-idf/components/pthread /home/yjkim/opt/esp/v5.2.1/esp-idf/components/sdmmc /home/yjkim/opt/esp/v5.2.1/esp-idf/components/soc /home/yjkim/opt/esp/v5.2.1/esp-idf/components/spi_flash /home/yjkim/opt/esp/v5.2.1/esp-idf/components/spiffs /home/yjkim/opt/esp/v5.2.1/esp-idf/components/tcp_transport /home/yjkim/opt/esp/v5.2.1/esp-idf/components/touch_element /home/yjkim/opt/esp/v5.2.1/esp-idf/components/ulp /home/yjkim/opt/esp/v5.2.1/esp-idf/components/unity /home/yjkim/opt/esp/v5.2.1/esp-idf/components/usb /home/yjkim/opt/esp/v5.2.1/esp-idf/components/vfs /home/yjkim/opt/esp/v5.2.1/esp-idf/components/wear_levelling /home/yjkim/opt/esp/v5.2.1/esp-idf/components/wifi_provisioning /home/yjkim/opt/esp/v5.2.1/esp-idf/components/wpa_supplicant /home/yjkim/opt/esp/v5.2.1/esp-idf/components/xtensa
+-- Configuring done (14.4s)
+-- Generating done (3.2s)
+-- Build files have been written to: /home/yjkim/works/esp32_ws/ESP_IDF_LGFX_test/build

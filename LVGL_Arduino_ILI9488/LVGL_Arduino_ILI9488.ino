@@ -4,10 +4,10 @@
 #include <lvgl.h>
 #if LV_USE_TFT_ESPI
 #include <TFT_eSPI.h>
+#include <GT911.h>
 #else
 #include "LGFX_ESP32S3_ILI9488_GT911_35.h"
 #endif
-#include <GT911.h>
 
 /*To use the built-in examples and demos of LVGL uncomment the includes below respectively.
  *You also need to copy `lvgl/examples` to `lvgl/src/examples`. Similarly for the demos `lvgl/demos` to `lvgl/src/demos`.
@@ -30,15 +30,6 @@ LGFX tft;
 
 void *draw_buf;
 unsigned long lastTickMillis = 0;
-
-/* GT911 I2C Interface */
-#define TS_I2C_ADDR     0x14
-#define TS_I2C_SDA      8
-#define TS_I2C_SCL      9
-#define TS_I2C_IRQ      3
-#define TS_I2C_RST      -1
-
-GT911 ts = GT911();
 
 /* LVGL calls it when a rendered image needs to copied to the display*/
 void my_disp_flush( lv_display_t *disp, const lv_area_t *area, uint8_t * px_map )
@@ -81,6 +72,17 @@ void my_disp_flush( lv_display_t *disp, const lv_area_t *area, uint8_t * px_map 
 }
 
 /*Read the touchpad*/
+#if LV_USE_TFT_ESPI
+/* GT911 I2C Interface */
+#define TS_I2C_ADDR     0x5D
+#define TS_I2C_IRQ      -1
+#define TS_I2C_RST      7
+#define TS_I2C_SDA      8
+#define TS_I2C_SCL      9
+
+// Declare touch device
+GT911 ts = GT911();
+
 void my_touchpad_read( lv_indev_t * indev, lv_indev_data_t * data )
 {
     uint8_t touches = ts.touched(GT911_MODE_INTERRUPT);
@@ -96,6 +98,21 @@ void my_touchpad_read( lv_indev_t * indev, lv_indev_data_t * data )
         data->state = LV_INDEV_STATE_RELEASED;
     }
 }
+#else
+void my_touchpad_read( lv_indev_t * indev, lv_indev_data_t * data )
+{
+    int32_t x, y;
+    if (tft.getTouch(&x, &y)) {
+        data->state = LV_INDEV_STATE_PRESSED;
+        data->point.x = x;
+        data->point.y = y;
+//        Serial.printf("x: %d, y: %d\n", data->point.x, data->point.y);
+    }
+    else {
+        data->state = LV_INDEV_STATE_RELEASED;
+    }
+}
+#endif
 
 void setup()
 {
@@ -111,8 +128,9 @@ void setup()
     tft.setRotation(3);
     tft.setBrightness(255);
     tft.startWrite();
-#endif
 
+    tft.setTouchCalibrate(tsCalibrationData);
+#else
     // initialize GT911 touch driver
     if (ts.begin(TS_I2C_IRQ, TS_I2C_RST, TS_I2C_ADDR, TS_I2C_SDA, TS_I2C_SCL)) {
       ts.setRotation(GT911::Rotate::_270);
@@ -121,6 +139,7 @@ void setup()
     else {
       Serial.println("GT911 ts doesn't be initialized.");
     }
+#endif
   
     lv_init();
 

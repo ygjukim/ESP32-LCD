@@ -6,16 +6,16 @@
 #include "GT911_Structs.h"
 
 // 0x28/0x29 (0x14 7bit)
-#define GT911_I2C_ADDR_28  0x14
+#define GT911_I2C_ADDR_28     0x14
 // 0xBA/0xBB (0x5D 7bit)
-#define GT911_I2C_ADDR_BA  0x5D
+#define GT911_I2C_ADDR_BA     0x5D
 
-#define GT911_MAX_CONTACTS 5
+#define GT911_MAX_CONTACTS    5
 
-#define GT911_REG_CFG 	   	0x8047
-#define GT911_REG_CHECKSUM 	0x80FF
-#define GT911_REG_DATA 	   	0x8140
-#define GT911_REG_ID 	   	0x8140
+#define GT911_REG_CFG 	   	  0x8047
+#define GT911_REG_CHECKSUM 	  0x80FF
+#define GT911_REG_DATA 	   	  0x8140
+#define GT911_REG_ID 	   	    0x8140
 #define GT911_REG_COORD_ADDR 	0x814E
 
 enum : uint8_t {
@@ -60,8 +60,8 @@ class GT911 {
   public:
     GT911(TwoWire *twi = &Wire);
     bool begin(int8_t intPin = -1, int8_t rstPin = -1, 
-    	       uint8_t addr = GT911_I2C_ADDR_BA,
-    	       int8_t sdaPin = -1, int8_t sclPin = -1,
+    	         uint8_t addr = GT911_I2C_ADDR_BA,
+    	         int8_t sdaPin = -1, int8_t sclPin = -1,
                uint32_t clk = 400000);
     bool productID(uint8_t *buf, uint8_t len);
     GTConfig* readConfig();

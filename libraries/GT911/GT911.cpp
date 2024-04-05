@@ -1,9 +1,11 @@
-#include "GT911.h"
 #include <Wire.h>
+#include "GT911.h"
 
 #ifndef ICACHE_RAM_ATTR
 #define ICACHE_RAM_ATTR
 #endif
+
+#define PIN_NC    -1
 
 // Interrupt handling
 volatile bool gt911IRQ = false;
@@ -39,23 +41,48 @@ void GT911::reset()
 {
   delay(1);
 
-  pinMode(_intPin, OUTPUT);
-  pinMode(_rstPin, OUTPUT);
+  if (_intPin == PIN_NC) {
+    pinMode(_rstPin, OUTPUT);
+    digitalWrite(_rstPin, HIGH);
 
-  digitalWrite(_intPin, LOW);
-  digitalWrite(_rstPin, LOW);
+    delay(10);
+    digitalWrite(_rstPin, LOW);   // reset GT911 controller 
 
-  delay(11);
+    delay(20);
 
-  digitalWrite(_intPin, _addr == GT911_I2C_ADDR_28);
+    digitalWrite(_rstPin, HIGH);
 
-  delayMicroseconds(110);
-  pinMode(_rstPin, INPUT);
+    delay(100);
+  }
+  else {
+    pinMode(_intPin, OUTPUT);
+    pinMode(_rstPin, OUTPUT);
 
-  delay(6);
-  digitalWrite(_intPin, LOW);
+    digitalWrite(_intPin, LOW);
+    digitalWrite(_rstPin, HIGH);
 
-  delay(51);
+    delay(10);
+    digitalWrite(_rstPin, LOW);   // reset GT911 controller 
+
+    /* begin select I2C slave addr */
+
+    /* T2: > 10ms */
+    delay(20);
+    /* HIGH: 0x28/0x29 (0x14 7bit), LOW: 0xBA/0xBB (0x5D 7bit) */
+    digitalWrite(_intPin, _addr == GT911_I2C_ADDR_28);
+
+    /* T3: > 100us */
+    delayMicroseconds(200);
+    digitalWrite(_rstPin, HIGH);
+
+    /* T4: > 5ms */
+    delay(10);
+    digitalWrite(_intPin, LOW);
+    /* end select I2C slave addr */
+
+    /* T5: 50ms */
+    delay(60);
+  }
 }
 
 void GT911::i2cStart(uint16_t reg)

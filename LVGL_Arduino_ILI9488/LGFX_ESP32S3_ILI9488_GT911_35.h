@@ -4,14 +4,14 @@
 #define LGFX_USE_V1
 #include <LovyanGFX.hpp>
 
-//#include <driver/i2c.h>
+#include <driver/i2c.h>
 
 class LGFX : public lgfx::LGFX_Device
 {
   lgfx::Panel_ILI9488     _panel_instance;
   lgfx::Bus_SPI           _bus_instance;
   lgfx::Light_PWM         _light_instance;
-//  lgfx::Touch_GT911       _touch_instance;
+  lgfx::Touch_GT911       _touch_instance;
 
 public:
 
@@ -78,7 +78,6 @@ public:
       _light_instance.config(cfg);
       _panel_instance.setLight(&_light_instance);  // バックライトをパネルにセットします。
     }
-/*
     { 
       auto cfg = _touch_instance.config();
 
@@ -92,17 +91,19 @@ public:
       cfg.pin_sda    =  GPIO_NUM_8;     // SDAが接続されているピン番号
       cfg.pin_scl    =  GPIO_NUM_9;     // SCLが接続されているピン番号
       cfg.pin_int    =  GPIO_NUM_NC;    // INTが接続されているピン番号
-      cfg.pin_rst    =  GPIO_NUM_3;    // INTが接続されているピン番号
-//      cfg.i2c_addr   =  0x5D;   // I2Cデバイスアドレス番号
+      cfg.pin_rst    =  GPIO_NUM_7;    // INTが接続されているピン番号
+      cfg.i2c_addr   =  0x5D;   // I2Cデバイスアドレス番号
       cfg.freq       =  400000;     // I2Cクロックを設定
       cfg.bus_shared =  false; // 画面と共通のバスを使用している場合 trueを設定
 
       _touch_instance.config(cfg);
       _panel_instance.setTouch(&_touch_instance);  // タッチスクリーンをパネルにセットします。
     }
-*/
+
     setPanel(&_panel_instance); // 使用するパネルをセットします。
   }
 };
+
+static uint16_t tsCalibrationData[] = { 3, 10, 3, 476, 312, 9, 312, 474 };
 
 #endif  // LGFX_ESP32S3_ILI9488_GT911_35_H

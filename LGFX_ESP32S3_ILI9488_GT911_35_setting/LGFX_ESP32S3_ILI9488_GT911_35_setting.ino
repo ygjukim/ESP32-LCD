@@ -2,6 +2,8 @@
 #include <LovyanGFX.hpp>
 #include "LGFX_ESP32S3_ILI9488_GT911_35.h"
 
+//#define GET_TS_CALIBRATION_DATA
+
 // 準備したクラスのインスタンスを作成します。
 LGFX display;
 
@@ -15,19 +17,29 @@ void setup(void)
   // タッチが使用可能な場合のキャリブレーションを行います。（省略可）
   if (display.touch())
   {
-//    if (display.width() < display.height()) display.setRotation(display.getRotation() ^ 1);
-    display.setRotation(3);
+   if (display.width() < display.height()) display.setRotation(display.getRotation() ^ 1);
 
     // 画面に案内文章を描画します。
     display.setTextDatum(textdatum_t::middle_center);
     display.drawString("touch the arrow marker.", display.width()>>1, display.height() >> 1);
     display.setTextDatum(textdatum_t::top_left);
 
+#ifdef GET_TS_CALIBRATION_DATA
     // タッチを使用する場合、キャリブレーションを行います。画面の四隅に表示される矢印の先端を順にタッチしてください。
     std::uint16_t fg = TFT_WHITE;
     std::uint16_t bg = TFT_BLACK;
     if (display.isEPD()) std::swap(fg, bg);
-    display.calibrateTouch(nullptr, fg, bg, std::max(display.width(), display.height()) >> 3);
+    uint16_t calibrationData[8];
+    display.calibrateTouch(calibrationData, fg, bg, std::max(display.width(), display.height()) >> 3);
+
+    printf("Touchscreen calibratiobn data:\n");
+    for (int i=0; i<7; i++) {
+      printf("%d, ", calibrationData[i]);
+    }
+    printf("%d\n", calibrationData[7]);
+#else
+    display.setTouchCalibrate(tsCalibrationData);
+#endif
   }
 
   display.fillScreen(TFT_BLACK);
