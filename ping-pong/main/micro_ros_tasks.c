@@ -21,6 +21,7 @@
 #endif
 
 #include "micro_ros_tasks.h"
+#include "other_tasks.h"
 
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Aborting.\n",__LINE__,(int)temp_rc);vTaskDelete(NULL);}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Continuing.\n",__LINE__,(int)temp_rc);}}
@@ -42,6 +43,10 @@ int device_id;
 int seq_no;
 int pong_count;
 
+QueueHandle_t uiInputEventQueue = NULL;
+QueueHandle_t uiOutputEventQueue = NULL;
+event_message_t eventMsg;
+
 void ping_timer_cb(rcl_timer_t * timer, int64_t last_call_time)
 {
 	RCLC_UNUSED(last_call_time);
@@ -59,6 +64,13 @@ void ping_timer_cb(rcl_timer_t * timer, int64_t last_call_time)
 		pong_count = 0;
 		RCSOFTCHECK(rcl_publish(&ping_publisher, (const void*)&outcoming_ping, NULL));
 		printf("Ping send seq no %s\n", outcoming_ping.frame_id.data);
+
+		eventMsg.type = 1;
+		eventMsg.sub_type += 1;
+		if (eventMsg.sub_type > 10) eventMsg.sub_type = 0;
+		if (xQueueSend(uiOutputEventQueue, (void *)&eventMsg, 0) != pdTRUE) {
+			printf("Failed to send an event message to uiOutputEventQueue!...\n");			
+		}
 	}
 }
 
@@ -165,9 +177,13 @@ void micro_ros_task(void * arg)
 
 	device_id = rand();
 
+	uiOutputEventQueue = xQueueCreate(10, sizeof(event_message_t));
+	memset(&eventMsg, 0, sizeof(event_message_t));
+
 	while (1) {
 		rclc_executor_spin_some(&executor, RCL_MS_TO_NS(10));
-		usleep(10000);
+//		usleep(10000);
+		vTaskDelay(pdMS_TO_TICKS(10));
 	}
 
 	// free resources

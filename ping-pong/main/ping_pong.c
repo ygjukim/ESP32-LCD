@@ -14,6 +14,7 @@
 #include "esp_system.h"
 
 #include "micro_ros_tasks.h"
+#include "other_tasks.h"
 
 void app_main(void)
 {
@@ -56,4 +57,12 @@ void app_main(void)
             CONFIG_MICRO_ROS_APP_TASK_PRIO,
             NULL);
 
+    // xTaskCreate(display_task,
+    //         "display_task",
+    //         CONFIG_MICRO_ROS_APP_STACK,
+    //         NULL,
+    //         CONFIG_MICRO_ROS_APP_TASK_PRIO,
+    //         NULL);
+
 }
+
